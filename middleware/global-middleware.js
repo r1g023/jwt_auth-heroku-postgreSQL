@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   generateToken,
   restrictedUser,
-  checkRole,
 };
 
 function generateToken(user) {

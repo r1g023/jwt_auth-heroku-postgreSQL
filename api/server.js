@@ -2,6 +2,7 @@ const express = require("express");
 const server = express();
 const cors = require("cors");
 const helmet = require("helmet");
+const { restrictedUser } = require("../middleware/global-middleware");
 
 //globacl middleware
 server.use(express.json(), cors(), helmet());
@@ -13,7 +14,7 @@ const authRouter = require("../auth/auth-router");
 
 //server endpoints
 server.use("/", welcomeRouter);
-server.use("/api/users", userRouter);
+server.use("/api/users", restrictedUser(), userRouter);
 server.use("/api/auth", authRouter);
 
 //middleware for CATCH ERROR on all endpoints of /api/messages
