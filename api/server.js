@@ -8,9 +8,11 @@ server.use(express.json(), cors(), helmet());
 
 //import routers
 const welcomeRouter = require("../welcome/welcome-router");
+const userRouter = require("../users/users-router");
 
 //server endpoints
 server.use("/", welcomeRouter);
+server.use("/api/users", userRouter);
 
 //middleware for CATCH ERROR on all endpoints of /api/messages
 server.use((err, req, res, next) => {
