@@ -8,7 +8,10 @@ module.exports = {
 };
 
 function get() {
-  return db("users").orderBy("id");
+  return db("users")
+    .join("roles", "roles.id", "users.role_id")
+    .select("users.id", "users.username", "users.email", "roles.role")
+    .orderBy("users.id");
 }
 
 function getById(id) {
