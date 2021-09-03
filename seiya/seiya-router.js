@@ -5,7 +5,7 @@ router.get("/", (req, res, next) => {
   const requestOptions = {
     headers: { accept: "application/json" },
   };
-
+  //
   axios
     .get("https://saint-seiya-api.herokuapp.com/api/characters", requestOptions)
     .then((response) => {
