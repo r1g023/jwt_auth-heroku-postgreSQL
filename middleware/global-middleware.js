@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 module.exports = {
   generateToken,
   restrictedUser,
+  checkRole,
 };
 
 function generateToken(user) {
@@ -32,6 +33,16 @@ function restrictedUser() {
       });
     } else {
       res.json({ message: "there is no token, please enter one" });
+    }
+  };
+}
+
+function checkRole() {
+  return (req, res, next) => {
+    if (req.decodedToken.role === 1) {
+      next();
+    } else {
+      res.json({ message: "you don't have access, must be ADMIN!" });
     }
   };
 }
