@@ -23,7 +23,7 @@ router.post("/login", (req, res, next) => {
       if (user && bcrypt.compareSync(credentials.password, user.password)) {
         res.json({ success: `welcome ${user.username} have a token!`, token });
       } else {
-        res.json({ message: "please validate login" });
+        res.json({ message: "please validate login.. });
       }
     })
     .catch((err) => next(err));
