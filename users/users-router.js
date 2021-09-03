@@ -4,7 +4,6 @@ const Users = require("../users/users-model");
 router.get("/", (req, res, next) => {
   Users.get()
     .then((user) => {
-      console.log("decoded token-------->", req.decodedToken);
       res.json(user);
     })
     .catch((err) => next(err));

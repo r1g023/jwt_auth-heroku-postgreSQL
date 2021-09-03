@@ -28,6 +28,7 @@ function restrictedUser() {
           res.json({ message: "not authorized, please provide token" });
         } else {
           req.decodedToken = decodedToken;
+          console.log("middleware decodedToken--->", decodedToken);
           next();
         }
       });
