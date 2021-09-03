@@ -41,7 +41,7 @@ module.exports = {
   },
   //heroku  pd // if deployed, this will be stored in postgres, data will persist long term vs sqlite3 which doesn't persist long enough and it resets after some time. NOT IDEAL!!!!!heroku doesn't save the data in SQLITE, so if we add a user or resource, it will dissapear after a while, it's best to use postrgress and setting pg in the production section. the enviroments will be added by heroku once deployed
   production: {
-    client: "pg",
+    client: "pg", // set up postgre
     connection: process.env.DATABASE_URL,
     migrations: {
       directory: "./database/migrations",
