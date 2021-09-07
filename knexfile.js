@@ -10,6 +10,7 @@
     - database_name (use the real name of the development database you created in pgAdmin 4)
     - testing_database_name (use the real name of the testing database you created in pgAdmin 4)
 */
+//
 require("dotenv").config();
 const pg = require("pg");
 
