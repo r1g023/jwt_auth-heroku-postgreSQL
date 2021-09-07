@@ -8,7 +8,17 @@
     "server": "cross-env NODE_ENV=development nodemon --require dotenv/config index.js",
     "start": "node index.js",
     "migrate": "knex migrate:latest",
-    "seed": "knex seed:run"
+    "seed": "knex seed:run",
+    "rollback": "knex migrate:rollback",
+    "migrateh": "heroku run knex migrate:latest -a YOUR_HEROKU_APP_NAME",
+    "rollbackh": "heroku run knex migrate:rollback -a YOUR_HEROKU_APP_NAME",
+    "databaseh": "heroku pg:psql -a YOUR_HEROKU_APP_NAME",
+    "seedh": "heroku run knex seed:run -a YOUR_HEROKU_APP_NAME",
+    "deploy": "git push heroku main"
+  },
+  "engines": {
+    "node": "14.17.2",
+    "npm": "7.21.1"
   },
   "repository": {
     "type": "git",
@@ -22,7 +32,7 @@
   },
   "homepage": "https://github.com/rigo0523/jwt_auth-heroku-postgreSQL#readme",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
