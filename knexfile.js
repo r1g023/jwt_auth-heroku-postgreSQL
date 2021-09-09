@@ -12,6 +12,7 @@
 */
 //
 const pg = require("pg");
+require("dotenv").config();
 
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
@@ -28,6 +29,12 @@ module.exports = {
     ...sharedConfig,
     // useNullAsDefault: true, ---> USED FOR SQLITE ONLy
     connection: process.env.DEV_DATABASE_URL,
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     // runs after a connection is made to the sqlite engine
+    //     conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
+    //   },
+    // },
   },
 
   //testing
