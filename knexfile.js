@@ -1,3 +1,4 @@
+require("dotenv").config();
 /*
   PORT=5000
   NODE_ENV=development
@@ -10,9 +11,7 @@
     - database_name (use the real name of the development database you created in pgAdmin 4)
     - testing_database_name (use the real name of the testing database you created in pgAdmin 4)
 */
-//
 const pg = require("pg");
-require("dotenv").config();
 
 if (process.env.DATABASE_URL) {
   pg.defaults.ssl = { rejectUnauthorized: false };
@@ -27,29 +26,12 @@ const sharedConfig = {
 module.exports = {
   development: {
     ...sharedConfig,
-    // useNullAsDefault: true, ---> USED FOR SQLITE ONLy
     connection: process.env.DEV_DATABASE_URL,
-    // pool: {
-    //   afterCreate: (conn, done) => {
-    //     // runs after a connection is made to the sqlite engine
-    //     conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-    //   },
-    // },
   },
-
-  //testing
   testing: {
     ...sharedConfig,
     connection: process.env.TESTING_DATABASE_URL,
-    // useNullAsDefault: true, ---> USED FOR SQLITE ONLy
-    // pool: {
-    //   afterCreate: (conn, done) => {
-    //     // runs after a connection is made to the sqlite engine
-    //     conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-    //   },
-    // },
   },
-
   production: {
     ...sharedConfig,
     connection: process.env.DATABASE_URL,
