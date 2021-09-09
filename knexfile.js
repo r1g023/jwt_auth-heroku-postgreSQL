@@ -11,7 +11,6 @@
     - testing_database_name (use the real name of the testing database you created in pgAdmin 4)
 */
 //
-require("dotenv").config();
 const pg = require("pg");
 
 if (process.env.DATABASE_URL) {
@@ -36,12 +35,12 @@ module.exports = {
     ...sharedConfig,
     connection: process.env.TESTING_DATABASE_URL,
     // useNullAsDefault: true, ---> USED FOR SQLITE ONLy
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      },
-    },
+    // pool: {
+    //   afterCreate: (conn, done) => {
+    //     // runs after a connection is made to the sqlite engine
+    //     conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
+    //   },
+    // },
   },
 
   production: {
