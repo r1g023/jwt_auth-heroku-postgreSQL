@@ -4,16 +4,16 @@
   "description": "Set up jwt auth with user roles and deployed to heroku with postgreSQL",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent",
-    "server": "cross-env NODE_ENV=development nodemon --require dotenv/config index.js",
     "start": "node index.js",
+    "server": "nodemon index.js",
     "migrate": "knex migrate:latest",
-    "seed": "knex seed:run",
     "rollback": "knex migrate:rollback",
+    "seed": "knex seed:run",
     "migrateh": "heroku run knex migrate:latest -a jwt-auth-postgresql",
     "rollbackh": "heroku run knex migrate:rollback -a jwt-auth-postgresql",
     "databaseh": "heroku pg:psql -a jwt-auth-postgresql",
     "seedh": "heroku run knex seed:run -a jwt-auth-postgresql",
+    "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand",
     "deploy": "git push heroku main"
   },
   "engines": {
