@@ -6,6 +6,7 @@ const helmet = require("helmet");
 //   restrictedUser,
 //   checkRole,
 // } = require("../middleware/global-middleware");
+//
 
 //globacl middleware
 server.use(express.json(), cors(), helmet());
