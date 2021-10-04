@@ -9,6 +9,7 @@ router.post("/register", (req, res, next) => {
   credentials.password = hashedPassword;
   Users.registerUser(credentials)
     .then((user) => {
+      console.log("register user----->", user);
       const token = generateToken(user);
       res.json({ user, token });
     })

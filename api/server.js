@@ -2,10 +2,11 @@ const express = require("express");
 const server = express();
 const cors = require("cors");
 const helmet = require("helmet");
-const {
-  restrictedUser,
-  checkRole,
-} = require("../middleware/global-middleware");
+// const {
+//   restrictedUser,
+//   checkRole,
+// } = require("../middleware/global-middleware");
+//
 
 //globacl middleware
 server.use(express.json(), cors(), helmet());
@@ -18,9 +19,9 @@ const seiyaRouter = require("../seiya/seiya-router");
 
 //server endpoints
 server.use("/", welcomeRouter);
-server.use("/api/users", restrictedUser(), userRouter);
+server.use("/api/users", userRouter);
 server.use("/api/auth", authRouter);
-server.use("/api/seiya", restrictedUser(), checkRole(), seiyaRouter);
+server.use("/api/seiya", seiyaRouter);
 
 //middleware for CATCH ERROR on all endpoints of /api/messages
 server.use((err, req, res, next) => {

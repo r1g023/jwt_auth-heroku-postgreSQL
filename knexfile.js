@@ -1,3 +1,4 @@
+require("dotenv").config();
 /*
   PORT=5000
   NODE_ENV=development
@@ -10,8 +11,6 @@
     - database_name (use the real name of the development database you created in pgAdmin 4)
     - testing_database_name (use the real name of the testing database you created in pgAdmin 4)
 */
-//
-require("dotenv").config();
 const pg = require("pg");
 
 if (process.env.DATABASE_URL) {
@@ -21,34 +20,18 @@ if (process.env.DATABASE_URL) {
 const sharedConfig = {
   client: "pg",
   migrations: { directory: "./database/migrations" },
-  seeds: { directory: "./database/migrations" },
+  seeds: { directory: "./database/seeds" },
 };
 
 module.exports = {
   development: {
     ...sharedConfig,
-    // useNullAsDefault: true, ---> USED FOR SQLITE ONLy
     connection: process.env.DEV_DATABASE_URL,
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      },
-    },
   },
-
-  //testing
   testing: {
     ...sharedConfig,
-    // useNullAsDefault: true, ---> USED FOR SQLITE ONLy
-    pool: {
-      afterCreate: (conn, done) => {
-        // runs after a connection is made to the sqlite engine
-        conn.run("PRAGMA foreign_keys = ON", done); // turn on FK enforcement
-      },
-    },
+    connection: process.env.TESTING_DATABASE_URL,
   },
-  //heroku  pd // if deployed, this will be stored in postgres, data will persist long term vs sqlite3 which doesn't persist long enough and it resets after some time. NOT IDEAL!!!!!heroku doesn't save the data in SQLITE, so if we add a user or resource, it will dissapear after a while, it's best to use postrgress and setting pg in the production section. the enviroments will be added by heroku once deployed
   production: {
     ...sharedConfig,
     connection: process.env.DATABASE_URL,
