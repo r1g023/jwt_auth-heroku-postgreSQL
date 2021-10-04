@@ -3,8 +3,8 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
   generateToken,
-  // restrictedUser,
-  // checkRole,
+  restrictedUser,
+  checkRole,
 };
 
 function generateToken(user) {
@@ -20,31 +20,31 @@ function generateToken(user) {
   return jwt.sign(payload, process.env.JWT_SECRET, options);
 }
 
-// function restrictedUser() {
-//   return (req, res, next) => {
-//     const token = req.headers.authorization;
-//     if (token) {
-//       jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
-//         if (err) {
-//           res.json({ message: "not authorized, please provide token" });
-//         } else {
-//           req.decodedToken = decodedToken;
-//           console.log("middleware decodedToken--->", decodedToken);
-//           next();
-//         }
-//       });
-//     } else {
-//       res.json({ message: "there is no token, please enter one" });
-//     }
-//   };
-// }
+function restrictedUser() {
+  return (req, res, next) => {
+    const token = req.headers.authorization;
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        if (err) {
+          res.json({ message: "not authorized, please provide token" });
+        } else {
+          req.decodedToken = decodedToken;
+          console.log("middleware decodedToken--->", decodedToken);
+          next();
+        }
+      });
+    } else {
+      res.json({ message: "there is no token, please enter one" });
+    }
+  };
+}
 
-// function checkRole() {
-//   return (req, res, next) => {
-//     if (req.decodedToken.role === 1) {
-//       next();
-//     } else {
-//       res.json({ message: "you don't have access, must be ADMIN!" });
-//     }
-//   };
-// }
+function checkRole() {
+  return (req, res, next) => {
+    if (req.decodedToken.role === 1) {
+      next();
+    } else {
+      res.json({ message: "you don't have access, must be ADMIN!" });
+    }
+  };
+}
