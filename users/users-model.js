@@ -19,8 +19,15 @@ function getById(id) {
 }
 
 //---------------------AUTH----------------------/
-function registerUser(data) {
-  return db("users").insert(data);
+async function registerUser(user) {
+  const [newUserObject] = await db("users").insert(user, [
+    "id",
+    "username",
+    "password",
+    "email",
+    "role_id",
+  ]);
+  return newUserObject;
 }
 
 function loginUser(filter) {
