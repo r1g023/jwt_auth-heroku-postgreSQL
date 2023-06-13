@@ -21,6 +21,7 @@ module.exports = {
     ...sharedConfig,
     connection: process.env.TESTING_DATABASE_URL,
   },
+  // for railway
   production: {
     ...sharedConfig,
     connection: process.env.DATABASE_URL,
