@@ -17,8 +17,8 @@
     "deploy": "git push heroku main"
   },
   "engines": {
-    "node": "20.0.0",
-    "npm": "9.6.4"
+    "node": "16.18.1",
+    "npm": "8.19.2"
   },
   "repository": {
     "type": "git",
