@@ -6,19 +6,20 @@ router.get("/", (req, res, next) => {
     headers: { accept: "application/json" },
   };
   //
-  axios
-    .get("https://saint-seiya-api.herokuapp.com/api/characters", requestOptions)
-    .then((response) => {
-      let result = [];
-      let i = 0;
-      for (i; i < response.data.length; i++) {
-        if (i <= 0) {
-          result.push(response.data[i]);
-        }
-      }
-      res.json(result);
-    })
-    .catch((err) => next(err));
+  // use dummy data for now
+  const dummyData = [
+    {
+      id: 1,
+      name: "Pegasus",
+      constellation: "Pegasus",
+    },
+    {
+      id: 2,
+      name: "Dragon",
+      constellation: "Dragon",
+    },
+  ];
+  res.status(200).json(dummyData);
 });
 
 module.exports = router;
