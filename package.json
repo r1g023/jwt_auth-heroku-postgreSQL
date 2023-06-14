@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "server": "cross-env NODE_ENV=production --omit=dev nodemon --require dotenv/config index.js",
+    "server": "cross-env NODE_ENV= --omit=dev nodemon --require dotenv/config index.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seed": "knex seed:run",
@@ -14,7 +14,11 @@
     "databaseh": "heroku pg:psql -a jwt-auth-postgresql",
     "seedh": "heroku run knex seed:run -a jwt-auth-postgresql",
     "test": "cross-env NODE_ENV=testing jest --watchAll --verbose --runInBand",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku main",
+    "migrater": "railway run knex migrate:latest --env production",
+    "rollbackr": "railway run knex migrate:rollback --env production",
+    "seedr": "railway run knex seed:run --env production",
+    "deployr": "railway up --env production"
   },
   "engines": {
     "node": "16.18.1",
